@@ -42,15 +42,16 @@ st.markdown("___")
 
 optionals = sidebar.expander("Optional Configurations", True)
 
-fare_select = optionals.slider( 
+fare_select_min = optionals.slider( 
   "Select the Fare",
   min_value = float(titanic_data['fare'].min()),
   max_value = float(titanic_data['fare'].max())
 )
 
-subset_fare = titanic_data[(titanic_data['fare'] >= fare_select)]
 
-st.write(f"Number of Records With this Fare {fare_select}: {subset_fare.shape[0]}")
+subset_fare = titanic_data[( (titanic_data['fare'] >= fare_select_min) ) ]
+
+st.write(f"Number of Records With this range: {subset_fare.shape[0]}")
 st.dataframe(subset_fare)
 
 st.markdown("___")
